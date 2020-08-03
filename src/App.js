@@ -17,6 +17,7 @@ const App = () => {
     const classes = useStyles();
 
     const [socket, setSocket] = useState(null);
+    const [data, setData] = useState([]);
 
 
     const userEntered = (user) => {
@@ -24,9 +25,21 @@ const App = () => {
         setSocket(socket);
 
         socket.emit("join", user);
+
         socket.on("chatJoin", data => {
-            console.log(data);
+            setData(data);
         });
+
+        socket.on("latestMessages", newData => {
+            setData(newData);
+        })
+    }
+
+    const newMessage = () => {
+        socket.on("latestMessages", newData => {
+            console.log(newData);
+            setData([...data, newData]);
+        })
     }
 
     return (
@@ -36,7 +49,7 @@ const App = () => {
             </header>
             <br/>
             <EnterUser userEntered={userEntered}/>
-            <ChatRoom/>
+            <ChatRoom data={data} socket={socket} newMessage={newMessage}/>
         </>
     );
 }

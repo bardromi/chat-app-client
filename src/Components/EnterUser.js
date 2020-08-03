@@ -30,13 +30,13 @@ const EnterUser = ({userEntered}) => {
     const classes = useStyles();
     // getModalStyle is not a pure function, we roll the style only on the first render
     const [modalStyle] = React.useState(getModalStyle);
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = React.useState(true);
     const [name, setName] = useState("");
     const [err, setErr] = useState("");
 
     const handleClose = () => setOpen(false);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = () => {
         axios.post("http://localhost:3000/api/users", {nickname: name})
             .then(res => {
                 if (res.data.success) {
@@ -74,7 +74,7 @@ const EnterUser = ({userEntered}) => {
                             </Grid>
                             <Grid item>
                                 <Button variant="contained" color="primary" onClick={handleSubmit}>
-                                    Primary
+                                    Submit
                                 </Button>
                             </Grid>
                         </Grid>

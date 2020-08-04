@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
-import {Grid, Paper, TextField, Typography, Box, Button} from '@material-ui/core';
+import {Avatar, Container, Grid, Paper, TextField, Typography, Box, Button} from '@material-ui/core';
+import moment from 'moment';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
         padding: theme.spacing(2),
-        // textAlign: 'center',
         color: theme.palette.text.secondary,
         height: '80vh',
         backgroundColor: '#fafafa',
@@ -13,11 +13,24 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column-reverse',
     },
-    records: {
+    recordsOther: {
         margin: theme.spacing(1),
         display: "inline-block",
-        padding: theme.spacing(1)
-    }
+        padding: theme.spacing(1),
+        backgroundColor: '#7986cb',
+    },
+    recordsMe: {
+        margin: theme.spacing(1),
+        display: "inline-block",
+        padding: theme.spacing(1),
+        backgroundColor: '#81c784',
+        textAlign: 'right',
+        float: 'right'
+    },
+    small: {
+        width: theme.spacing(3),
+        height: theme.spacing(3),
+    },
 }));
 
 const ChatRoom = ({user, data, socket}) => {
@@ -37,22 +50,49 @@ const ChatRoom = ({user, data, socket}) => {
         >
             <Grid item xs={8}>
                 <Paper className={classes.paper} elevation={3}>
-                    <Grid container>
-                        {
-                            data.messages &&
-                            data.messages.map(message =>
-                                (
-                                    <Grid item xs={12}>
-                                        <Paper className={classes.records} key={message.id}>
-                                            {message.User.nickname}:
-                                            <Typography variant="body1">{message.message}</Typography>
-                                        </Paper>
-                                    </Grid>
-
+                    <Container>
+                        <Grid container>
+                            {
+                                data &&
+                                data.map(message =>
+                                    (
+                                        <Grid item xs={12}>
+                                            <Paper
+                                                className={message.User.id === user.id ? classes.recordsMe : classes.recordsOther}
+                                                key={message.id}>
+                                                <Grid container spacing={1}>
+                                                    {
+                                                        message.User.id !== user.id &&
+                                                        <Grid item xs={12}>
+                                                            <b>{message.User.nickname}</b>
+                                                        </Grid>
+                                                    }
+                                                    {
+                                                        message.User.id !== user.id &&
+                                                        <Grid item>
+                                                            <Avatar
+                                                                className={classes.small}
+                                                                style={{backgroundColor: message.User.color}}
+                                                            >
+                                                                {message.User.avatar}
+                                                            </Avatar>
+                                                        </Grid>
+                                                    }
+                                                    <Grid item>
+                                                        <Typography variant="body1">{message.message}</Typography>
+                                                    </Grid>
+                                                    {/*<Grid item xs={12}>*/}
+                                                    {/*    {moment(message.createdAt).calendar()}*/}
+                                                    {/*</Grid>*/}
+                                                </Grid>
+                                                {moment(message.createdAt).calendar()}
+                                            </Paper>
+                                        </Grid>
+                                    )
                                 )
-                            )
-                        }
-                    </Grid>
+                            }
+                        </Grid>
+                    </Container>
                 </Paper>
             </Grid>
             <Grid item xs={8}>

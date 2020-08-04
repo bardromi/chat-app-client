@@ -35,7 +35,8 @@ const EnterUser = ({userEntered}) => {
 
     const [open, setOpen] = React.useState(true);
     const [name, setName] = useState("");
-    const [err, setErr] = useState("");
+    const [errMessage, setErrMessage] = useState("");
+    const [err, setErr] = useState(false);
 
     const handleClose = () => setOpen(false);
 
@@ -43,11 +44,13 @@ const EnterUser = ({userEntered}) => {
         axios.post(`${config.server}/api/users`, {nickname: name})
             .then(res => {
                 if (res.data.success) {
-                    setErr("");
+                    setErr(false);
+                    setErrMessage("");
                     handleClose();
                     userEntered(res.data.data);
                 } else {
-                    setErr(res.data.message);
+                    setErr(true);
+                    setErrMessage(res.data.message);
                 }
             })
     }
@@ -72,7 +75,7 @@ const EnterUser = ({userEntered}) => {
                                     placeholder="Enter Nickname"
                                     value={name}
                                     onChange={e => setName(e.target.value)}
-                                    helperText={err}
+                                    helperText={errMessage}
                                 />
                             </Grid>
                             <Grid item>

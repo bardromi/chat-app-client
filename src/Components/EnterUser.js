@@ -3,6 +3,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import {Modal, TextField, Typography, Button} from '@material-ui/core';
 import axios from "axios";
 import Grid from "@material-ui/core/Grid";
+import config from '../config';
 
 function getModalStyle() {
     const top = 50;
@@ -28,8 +29,10 @@ const useStyles = makeStyles((theme) => ({
 
 const EnterUser = ({userEntered}) => {
     const classes = useStyles();
+
     // getModalStyle is not a pure function, we roll the style only on the first render
     const [modalStyle] = React.useState(getModalStyle);
+
     const [open, setOpen] = React.useState(true);
     const [name, setName] = useState("");
     const [err, setErr] = useState("");
@@ -37,7 +40,7 @@ const EnterUser = ({userEntered}) => {
     const handleClose = () => setOpen(false);
 
     const handleSubmit = () => {
-        axios.post("http://localhost:3000/api/users", {nickname: name})
+        axios.post(`${config.server}/api/users`, {nickname: name})
             .then(res => {
                 if (res.data.success) {
                     setErr("");

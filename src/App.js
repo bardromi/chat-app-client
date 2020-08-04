@@ -4,10 +4,11 @@ import ChatRoom from "./Components/ChatRoom";
 import socketIOClient from "socket.io-client";
 import {makeStyles} from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
+import config from './config';
 
-const ENDPOINT = "http://localhost:3000";
+const ENDPOINT = config.server;
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
     title: {
         textAlign: 'center',
     },

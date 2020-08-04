@@ -20,17 +20,15 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const ChatRoom = ({data, socket}) => {
+const ChatRoom = ({user, data, socket}) => {
 
     const classes = useStyles();
     const [message, setMessage] = useState("");
 
     const handleSubmit = () => {
-        socket.emit("message", {author_id: data.user_id, message: message})
+        socket.emit("message", {author_id: user.id, message: message})
         setMessage("");
     }
-
-    // console.log("ChatRoom", data);
 
     return (
         <Grid

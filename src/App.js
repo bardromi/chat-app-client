@@ -18,6 +18,7 @@ const App = () => {
 
     const [socket, setSocket] = useState(null);
     const [data, setData] = useState([]);
+    const [user, setUser] = useState();
 
 
     const userEntered = (user) => {
@@ -28,6 +29,7 @@ const App = () => {
 
         socket.on("chatJoin", data => {
             setData(data);
+            setUser(user);
         });
 
         socket.on("latestMessages", newData => {
@@ -43,7 +45,7 @@ const App = () => {
             </header>
             <br/>
             <EnterUser userEntered={userEntered}/>
-            <ChatRoom data={data} socket={socket}/>
+            <ChatRoom user={user} data={data} socket={socket}/>
         </>
     );
 }

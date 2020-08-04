@@ -10,6 +10,8 @@ const useStyles = makeStyles((theme) => ({
         height: '80vh',
         backgroundColor: '#fafafa',
         overflowY: 'scroll',
+        display: 'flex',
+        flexDirection: 'column-reverse',
     },
     records: {
         margin: theme.spacing(1),
@@ -18,17 +20,17 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const ChatRoom = ({data, socket, newMessage}) => {
+const ChatRoom = ({data, socket}) => {
 
     const classes = useStyles();
     const [message, setMessage] = useState("");
 
     const handleSubmit = () => {
         socket.emit("message", {author_id: data.user_id, message: message})
-        // newMessage();
+        setMessage("");
     }
 
-    console.log(data.messages);
+    // console.log("ChatRoom", data);
 
     return (
         <Grid

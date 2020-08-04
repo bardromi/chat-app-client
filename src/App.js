@@ -31,14 +31,8 @@ const App = () => {
         });
 
         socket.on("latestMessages", newData => {
+            // console.log('userEntered', newData);
             setData(newData);
-        })
-    }
-
-    const newMessage = () => {
-        socket.on("latestMessages", newData => {
-            console.log(newData);
-            setData([...data, newData]);
         })
     }
 
@@ -49,7 +43,7 @@ const App = () => {
             </header>
             <br/>
             <EnterUser userEntered={userEntered}/>
-            <ChatRoom data={data} socket={socket} newMessage={newMessage}/>
+            <ChatRoom data={data} socket={socket}/>
         </>
     );
 }

@@ -1,7 +1,8 @@
 import React from 'react';
 import {makeStyles} from '@material-ui/core/styles';
-import {Container, Grid, Paper} from "@material-ui/core";
+import {Avatar, Container, Grid, Paper} from "@material-ui/core";
 import Message from "./Message";
+import Box from "@material-ui/core/Box";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -26,9 +27,23 @@ const MessagesBoard = ({data, user}) => {
                         data &&
                         data.map(message =>
                             (
-                                <Grid key={message.id} item xs={12}>
-                                    <Message message={message} myMessage={message.User.id === user.id}/>
-                                </Grid>
+                                <React.Fragment key={message.id}>
+                                    <Grid item xs={1}>
+                                        {
+                                            message.User.id !== user.id &&
+                                            <Box mt={3}>
+                                                <Avatar
+                                                    style={{backgroundColor: message.User.color}}
+                                                >
+                                                    {message.User.avatar}
+                                                </Avatar>
+                                            </Box>
+                                        }
+                                    </Grid>
+                                    <Grid xs={11}>
+                                        <Message message={message} myMessage={message.User.id === user.id}/>
+                                    </Grid>
+                                </React.Fragment>
                             )
                         )
                     }

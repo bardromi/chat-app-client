@@ -1,6 +1,6 @@
 import React from 'react';
 import {makeStyles} from '@material-ui/core/styles';
-import {Avatar, Grid, Paper, Typography} from '@material-ui/core';
+import {Grid, Paper, Typography} from '@material-ui/core';
 import moment from 'moment';
 
 const useStyles = makeStyles((theme) => ({
@@ -27,10 +27,6 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'right',
         float: 'right'
     },
-    small: {
-        width: theme.spacing(3),
-        height: theme.spacing(3),
-    },
 }));
 
 const Message = ({message, myMessage}) => {
@@ -38,25 +34,12 @@ const Message = ({message, myMessage}) => {
     const classes = useStyles();
 
     return (
-        <Paper
-            className={myMessage ? classes.recordsMe : classes.recordsOther}
-            key={message.id}>
+        <Paper className={myMessage ? classes.recordsMe : classes.recordsOther}>
             <Grid container spacing={1}>
                 {
                     !myMessage &&
                     <Grid item xs={12}>
                         <b>{message.User.nickname}</b>
-                    </Grid>
-                }
-                {
-                    !myMessage &&
-                    <Grid item>
-                        <Avatar
-                            className={classes.small}
-                            style={{backgroundColor: message.User.color}}
-                        >
-                            {message.User.avatar}
-                        </Avatar>
                     </Grid>
                 }
                 <Grid item>

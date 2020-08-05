@@ -56,12 +56,6 @@ const EnterUser = ({userEntered}) => {
             })
     }
 
-    const onKeyPress = (e) => {
-        if (e.which === 13) {
-            handleSubmit();
-        }
-    }
-
     return (
         <div>
             <Modal
@@ -83,7 +77,6 @@ const EnterUser = ({userEntered}) => {
                                     value={name}
                                     onChange={e => setName(e.target.value)}
                                     helperText={errMessage}
-                                    onKeyPress={onKeyPress}
                                 />
                             </Grid>
                             <Grid item>

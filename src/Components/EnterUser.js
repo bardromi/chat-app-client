@@ -41,6 +41,7 @@ const EnterUser = ({userEntered}) => {
     const handleClose = () => setOpen(false);
 
     const handleSubmit = () => {
+        console.log("bar");
         axios.post(`${config.server}/api/users`, {nickname: name})
             .then(res => {
                 if (res.data.success) {
@@ -53,6 +54,12 @@ const EnterUser = ({userEntered}) => {
                     setErrMessage(res.data.message);
                 }
             })
+    }
+
+    const onKeyPress = (e) => {
+        if (e.which === 13) {
+            handleSubmit();
+        }
     }
 
     return (
@@ -76,6 +83,7 @@ const EnterUser = ({userEntered}) => {
                                     value={name}
                                     onChange={e => setName(e.target.value)}
                                     helperText={errMessage}
+                                    onKeyPress={onKeyPress}
                                 />
                             </Grid>
                             <Grid item>

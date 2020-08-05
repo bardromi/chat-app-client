@@ -1,6 +1,6 @@
 import React from 'react';
 import {makeStyles} from '@material-ui/core/styles';
-import {Avatar, Grid, Paper, TextField, Typography, Box, Button} from '@material-ui/core';
+import {Avatar, Grid, Paper, Typography} from '@material-ui/core';
 import moment from 'moment';
 
 const useStyles = makeStyles((theme) => ({
@@ -17,13 +17,13 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(1),
         display: "inline-block",
         padding: theme.spacing(1),
-        backgroundColor: '#7986cb',
+        backgroundColor: '#e3f2fd',
     },
     recordsMe: {
         margin: theme.spacing(1),
         display: "inline-block",
         padding: theme.spacing(1),
-        backgroundColor: '#81c784',
+        backgroundColor: '#00bfa5',
         textAlign: 'right',
         float: 'right'
     },

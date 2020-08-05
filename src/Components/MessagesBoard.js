@@ -26,7 +26,7 @@ const MessagesBoard = ({data, user}) => {
                         data &&
                         data.map(message =>
                             (
-                                <Grid item xs={12}>
+                                <Grid key={message.id} item xs={12}>
                                     <Message message={message} myMessage={message.User.id === user.id}/>
                                 </Grid>
                             )

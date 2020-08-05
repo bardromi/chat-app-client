@@ -28,7 +28,7 @@ const ChatInput = ({user, socket}) => {
         <Paper className={classes.paper} elevation={3}>
             <Box ml={2} mr={2} pt={1} pb={1}>
                 <Grid container>
-                    <Grid item xs={11}>
+                    <Grid item sm={10}>
                         <TextField
                             fullWidth={true}
                             placeholder="Type a message"
@@ -37,7 +37,7 @@ const ChatInput = ({user, socket}) => {
                             onKeyPress={onKeyPress}
                         />
                     </Grid>
-                    <Grid item>
+                    <Grid item sm={1}>
                         <Box pl={2}>
                             <Button size="small" variant="contained" color="primary" onClick={handleSubmit}>
                                 Submit

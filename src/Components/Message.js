@@ -1,7 +1,8 @@
 import React from 'react';
 import {makeStyles} from '@material-ui/core/styles';
-import {Grid, Paper, Typography} from '@material-ui/core';
+import {Avatar, Grid, Paper, Typography} from '@material-ui/core';
 import moment from 'moment';
+import Box from "@material-ui/core/Box";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -34,23 +35,36 @@ const Message = ({message, myMessage}) => {
     const classes = useStyles();
 
     return (
-        <Paper className={myMessage ? classes.recordsMe : classes.recordsOther}>
-            <Grid container spacing={1}>
+        <React.Fragment>
+            <Grid item xs={1}>
                 {
                     !myMessage &&
-                    <Grid item xs={12}>
-                        <b>{message.User.nickname}</b>
-                    </Grid>
+                    <Box mt={3}>
+                        <Avatar
+                            style={{backgroundColor: message.User.color}}
+                        >
+                            {message.User.avatar}
+                        </Avatar>
+                    </Box>
                 }
-                <Grid item>
-                    <Typography variant="body1">{message.message}</Typography>
-                </Grid>
-                {/*<Grid item xs={12}>*/}
-                {/*    {moment(message.createdAt).calendar()}*/}
-                {/*</Grid>*/}
             </Grid>
-            {moment(message.createdAt).calendar()}
-        </Paper>
+            <Grid item xs={11}>
+                <Paper className={myMessage ? classes.recordsMe : classes.recordsOther}>
+                    <Grid container spacing={1}>
+                        {
+                            !myMessage &&
+                            <Grid item xs={12}>
+                                <b>{message.User.nickname}</b>
+                            </Grid>
+                        }
+                        <Grid item>
+                            <Typography variant="body1">{message.message}</Typography>
+                        </Grid>
+                    </Grid>
+                    {moment(message.createdAt).calendar()}
+                </Paper>
+            </Grid>
+        </React.Fragment>
     )
 }
 

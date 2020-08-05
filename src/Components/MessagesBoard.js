@@ -1,18 +1,27 @@
 import React from 'react';
 import {makeStyles} from '@material-ui/core/styles';
-import {Avatar, Container, Grid, Paper} from "@material-ui/core";
+import {Container, Grid, Paper} from "@material-ui/core";
 import Message from "./Message";
-import Box from "@material-ui/core/Box";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
         padding: theme.spacing(2),
         color: theme.palette.text.secondary,
-        height: '80vh',
+        // height: '80vh',
         backgroundColor: '#fafafa',
         overflowY: 'scroll',
         display: 'flex',
         flexDirection: 'column-reverse',
+    },
+    '@media (max-height: 850px)': {
+        paper: {
+            height: '60vh',
+        }
+    },
+    '@media (min-height: 851px)': {
+        paper: {
+            height: '80vh',
+        }
     },
 }));
 
@@ -27,23 +36,7 @@ const MessagesBoard = ({data, user}) => {
                         data &&
                         data.map(message =>
                             (
-                                <React.Fragment key={message.id}>
-                                    <Grid item xs={1}>
-                                        {
-                                            message.User.id !== user.id &&
-                                            <Box mt={3}>
-                                                <Avatar
-                                                    style={{backgroundColor: message.User.color}}
-                                                >
-                                                    {message.User.avatar}
-                                                </Avatar>
-                                            </Box>
-                                        }
-                                    </Grid>
-                                    <Grid xs={11}>
-                                        <Message message={message} myMessage={message.User.id === user.id}/>
-                                    </Grid>
-                                </React.Fragment>
+                                <Message key={message.id} message={message} myMessage={message.User.id === user.id}/>
                             )
                         )
                     }

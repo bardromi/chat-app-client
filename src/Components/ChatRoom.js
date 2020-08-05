@@ -12,13 +12,13 @@ const ChatRoom = ({user, users, data, socket}) => {
             justify="center"
             spacing={1}
         >
-            <Grid item xs={2}>
+            <Grid item sm={2} xs={12}>
                 <UsersList users={users}/>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item sm={6} xs={12}>
                 <MessagesBoard data={data} user={user}/>
             </Grid>
-            <Grid item xs={8}>
+            <Grid item sm={8} xs={12}>
                 <ChatInput user={user} socket={socket}/>
             </Grid>
         </Grid>

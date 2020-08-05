@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
     paper: {
         padding: theme.spacing(2),
         // color: theme.palette.text.secondary,
-        height: '80vh',
+        // height: '80vh',
         backgroundColor: '#eeeeee',
         overflowY: 'auto',
         // display: 'flex',
@@ -17,6 +17,22 @@ const useStyles = makeStyles((theme) => ({
     small: {
         width: theme.spacing(3),
         height: theme.spacing(3),
+    },
+
+    '@media (max-height: 850px)': {
+        paper: {
+            height: '60vh',
+        }
+    },
+    '@media (max-height: 850px) and (max-width:400px)': {
+        paper: {
+            height: '10vh',
+        }
+    },
+    '@media (min-height: 800px) and (min-width:400px)':{
+        paper: {
+            height: '80vh',
+        }
     },
 }));
 

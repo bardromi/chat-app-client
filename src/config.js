@@ -1,5 +1,5 @@
 const config = {
-    server: "http://localhost:3000"
+    server: "https://enigmatic-wildwood-85734.herokuapp.com"
 }
 
 export default config;
